@@ -32,13 +32,16 @@ void Generator::worker()
 
 void Generator::run()
 {
+	/***************
+	//populate contexts and incompleteContexts
+	//start workers
+	//wait for workers
+	//merge contexts
+	****************/
+
 	//for now im going to not try and subdivide space
 	incompleteContexts.clear();
 	incompleteContexts.push_back(context);
 	worker();
 }
 
-float Generator::generatePoint(sf::Vector2f pos)
-{
-	return abs(sin(pos.x + pos.y));
-}

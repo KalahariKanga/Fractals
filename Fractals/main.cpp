@@ -1,4 +1,4 @@
-#include "Generator.h"
+#include "MandelbrotGenerator.h"
 
 int main()
 {
@@ -7,11 +7,11 @@ int main()
 	sf::Sprite sprite;
 	sf::Texture texture;
 
-	window.create(sf::VideoMode(640, 480), "Fractals");
+	window.create(sf::VideoMode(640, 640), "Fractals");
 	
 
-	Generator gen;
-	DrawContext context(View(-2, -2, 4, 4), View(0, 0, 640, 480));
+	MandelbrotGenerator gen;
+	DrawContext context(View(-2, -2, 4, 4), View(0, 0, 640, 640));
 	gen.context = &context;
 	gen.run();
 
