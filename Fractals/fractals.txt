@@ -1,0 +1,76 @@
+class Colour;
+
+class Canvas
+{
+	sf::Image image;
+	sf::Uint8* data;
+	int width, height;
+public:
+	void setPoint(int x, int y, Colour col);
+}
+
+class Palette
+{
+	struct ColourPoint
+	{
+		float position;
+		Colour colour;
+	}
+	std::vector<ColourPoint> colourPoints;
+public:
+	Colour getColour(float pos);
+	void addPoint(float pos, Colour col);
+}
+
+class View
+{
+	float x, y, w, h;
+}
+
+class DrawContext
+{
+	View view;
+	Canvas canvas;
+	int screenX, screenY;
+}
+
+class Generator
+{
+	DrawContext* context;
+	std::vector<DrawContext*> incompleteContexts;
+	std::vector<DrawContext> contexts;
+	std::mutex contextsMutex;
+	
+	auto worker = [&]()
+	{
+		while(1)
+		{
+			//mutex lock
+			if(contexts.empty()) return;
+
+			DrawContext *current = incompleteContexts.back();
+			contexts.pop_back();
+			//unlock
+			
+			for(...)
+				for(...)
+					current.setPoint(cx,cy,getColour(generatePoint(cx,cy));
+		}
+	}
+		
+		
+protected:
+	virtual float generatePoint(float x, float y);
+public:
+	void run()
+	{
+		//populate contexts and incompleteContexts
+		//start workers
+		//wait for workers
+		//merge contexts
+	}
+}
+		
+
+
+
