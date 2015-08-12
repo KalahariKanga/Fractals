@@ -11,7 +11,7 @@ public:
 	~Canvas();
 
 	void setPoint(int x, int y, Colour col);
-
+	Colour getPoint(int x, int y);
 	sf::Image* getImage();
 };
 

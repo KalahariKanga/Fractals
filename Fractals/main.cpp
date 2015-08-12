@@ -60,6 +60,7 @@ int main()
 		if (needUpdate)
 		{
 			gen.run();
+			needUpdate = 0;
 		}
 
 		texture.loadFromImage(*(context.canvas->getImage()));

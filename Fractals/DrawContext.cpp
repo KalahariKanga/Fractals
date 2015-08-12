@@ -3,7 +3,7 @@
 
 DrawContext::DrawContext(View world, View screen)
 {
-	canvas = new Canvas(screen.w, screen.h);
+	canvas = std::make_shared<Canvas>(screen.w, screen.h);
 	worldView = world;
 	screenView = screen;
 }
@@ -11,7 +11,6 @@ DrawContext::DrawContext(View world, View screen)
 
 DrawContext::~DrawContext()
 {
-	delete canvas;
 
 }
 
@@ -30,5 +29,17 @@ sf::Vector2i DrawContext::worldToScreen(coord x, coord y)
 void DrawContext::setPoint(int x, int y, Colour col)
 {
 	canvas->setPoint(x - screenView.x, y - screenView.y, col);
+}
+
+Colour DrawContext::getPoint(int x, int y)
+{
+	return canvas->getPoint(x - screenView.x, y - screenView.y);
+}
+
+void DrawContext::mergeContext(DrawContext* from)
+{
+	for (int cx = from->screenView.x; cx < from->screenView.x + from->screenView.w; cx++)
+		for (int cy = from->screenView.y; cy < from->screenView.y + from->screenView.h; cy++)
+			setPoint(cx, cy, from->getPoint(cx, cy));
 }
 

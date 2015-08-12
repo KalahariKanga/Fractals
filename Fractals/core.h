@@ -3,5 +3,9 @@
 
 #include <vector>
 #include <mutex>
+#include <thread>
+#include <memory>
+#include <chrono>
+#include <iostream>
 
 using coord = double;

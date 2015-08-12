@@ -10,13 +10,14 @@ public:
 	DrawContext(View world, View screen);
 	~DrawContext();
 	
-	Canvas* canvas;
+	std::shared_ptr<Canvas> canvas;
 	View worldView, screenView;
-	int screenX, screenY;
 	sf::Vector2<coord> screenToWorld(int x, int y);
 	sf::Vector2i worldToScreen(coord x, coord y);
 
 	void setPoint(int x, int y, Colour col);
+	Colour getPoint(int x, int y);
+	void mergeContext(DrawContext* from);
 	sf::Image* getImage();
 };
 

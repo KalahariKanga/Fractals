@@ -8,7 +8,6 @@ public:
 	~View();
 	float x, y, w, h;
 
-	/*translate etc*/
 	void translate(coord dx, coord dy);
 	void translateAmount(float xAmount, float yAmount);
 	void scale(float amount);

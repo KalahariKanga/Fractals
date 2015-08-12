@@ -22,6 +22,11 @@ void Canvas::setPoint(int x, int y, Colour col)
 	data[4 * (y*width + x) + 3] = 255;
 }
 
+Colour Canvas::getPoint(int x, int y)
+{
+	return Colour(data[4 * (y*width + x)], data[4 * (y*width + x) + 1], data[4 * (y*width + x) + 2]);
+}
+
 sf::Image* Canvas::getImage()
 {
 	image.create(width, height, data);
