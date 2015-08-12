@@ -3,8 +3,8 @@
 class Generator
 {
 	
-	std::vector<DrawContext*> incompleteContexts;
-	std::vector<DrawContext*> contexts;
+	std::vector<std::shared_ptr<DrawContext>> incompleteContexts;
+	std::vector<std::shared_ptr<DrawContext>> contexts;
 	std::mutex contextsMutex;
 	
 	void subdivideContext();

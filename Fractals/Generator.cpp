@@ -28,9 +28,9 @@ void Generator::subdivideContext()
 		View sView(context->screenView.x + c*screenWidth, context->screenView.y, screenWidth, context->screenView.h);
 //		contexts.emplace_back(wView, sView);
 //		contexts.push_back(DrawContext(wView, sView));
-		contexts.push_back(new DrawContext(wView, sView));//obviously leak
+		contexts.push_back(std::make_shared<DrawContext>(wView, sView));
 
-		incompleteContexts.push_back(contexts.back());
+		incompleteContexts.push_back(std::shared_ptr<DrawContext>(contexts.back()));
 	}
 }
 
@@ -44,7 +44,7 @@ void Generator::worker()
 			contextsMutex.unlock();
 			return;
 		}
-		DrawContext* current = incompleteContexts.back();
+		DrawContext* current = incompleteContexts.back().get();
 		incompleteContexts.pop_back();
 		contextsMutex.unlock();
 
@@ -85,7 +85,7 @@ void Generator::run()
 	for (auto &t : threads)
 		t.join();
 	for (auto dc : contexts)
-		context->mergeContext(dc);
+		context->mergeContext(dc.get());
 
 	auto end_time = std::chrono::high_resolution_clock::now();
 
