@@ -15,14 +15,14 @@ DrawContext::~DrawContext()
 
 }
 
-sf::Vector2f DrawContext::screenToWorld(int x, int y)
+sf::Vector2<coord> DrawContext::screenToWorld(int x, int y)
 {
-	float newX = worldView.x + ((float)(x - screenView.x) / screenView.w)*worldView.w;
-	float newY = worldView.y + ((float)(y - screenView.y) / screenView.h)*worldView.h;
-	return sf::Vector2f(newX, newY);
+	coord newX = worldView.x + ((coord)(x - screenView.x) / screenView.w)*worldView.w;
+	coord newY = worldView.y + ((coord)(y - screenView.y) / screenView.h)*worldView.h;
+	return sf::Vector2<coord>(newX, newY);
 }
 
-sf::Vector2i DrawContext::worldToScreen(float x, float y)
+sf::Vector2i DrawContext::worldToScreen(coord x, coord y)
 {
 	return sf::Vector2i();
 }

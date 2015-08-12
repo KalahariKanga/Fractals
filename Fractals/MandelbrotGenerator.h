@@ -4,9 +4,11 @@ class MandelbrotGenerator :
 	public Generator
 {
 protected:
-	virtual float generatePoint(sf::Vector2f pos);
+	virtual float generatePoint(sf::Vector2<coord> pos);
 public:
 	MandelbrotGenerator();
 	~MandelbrotGenerator();
 };
+
+
 

@@ -10,11 +10,11 @@ MandelbrotGenerator::~MandelbrotGenerator()
 {
 }
 
-float MandelbrotGenerator::generatePoint(sf::Vector2f pos)
+float MandelbrotGenerator::generatePoint(sf::Vector2<coord> pos)
 {
-	float newa, newb;
-	float a = pos.x;
-	float b = pos.y;
+	coord newa, newb;
+	coord a = pos.x;
+	coord b = pos.y;
 	int loopSize = 100;// abs(log(double(endx - startx))) * 50 + 100;
 	for (int count = 0; count < loopSize; count++)
 	{
@@ -23,7 +23,7 @@ float MandelbrotGenerator::generatePoint(sf::Vector2f pos)
 		/*newa = a*a*a - 3*a*b*b + pos.x;
 		newb = 3*a*a*b - b*b*b + pos.y;*/
 
-		if (sqrt(newa*newa + newb*newb) > 50)
+		if (sqrt(newa*newa + newb*newb) > 4)
 		{
 			return 1 - ((float)count / loopSize);
 		}

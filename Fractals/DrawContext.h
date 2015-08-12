@@ -13,8 +13,8 @@ public:
 	Canvas* canvas;
 	View worldView, screenView;
 	int screenX, screenY;
-	sf::Vector2f screenToWorld(int x, int y);
-	sf::Vector2i worldToScreen(float x, float y);
+	sf::Vector2<coord> screenToWorld(int x, int y);
+	sf::Vector2i worldToScreen(coord x, coord y);
 
 	void setPoint(int x, int y, Colour col);
 	sf::Image* getImage();

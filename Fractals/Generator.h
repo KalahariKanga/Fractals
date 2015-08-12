@@ -10,7 +10,7 @@ class Generator
 	void worker();
 
 protected:
-	virtual float generatePoint(sf::Vector2f pos) = 0;
+	virtual float generatePoint(sf::Vector2<coord> pos) = 0;
 public:
 	Generator();
 	~Generator();
