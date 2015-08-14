@@ -15,7 +15,7 @@ float MandelbrotGenerator::generatePoint(sf::Vector2<coord> pos)
 	coord newa, newb;
 	coord a = pos.x;
 	coord b = pos.y;
-	int loopSize = 100;// abs(log(double(endx - startx))) * 50 + 100;
+	int loopSize = abs(log(context->worldView.w)) * 50 + 100;
 	for (int count = 0; count < loopSize; count++)
 	{
 		newa = a*a - b*b + pos.x;
@@ -23,7 +23,7 @@ float MandelbrotGenerator::generatePoint(sf::Vector2<coord> pos)
 		/*newa = a*a*a - 3*a*b*b + pos.x;
 		newb = 3*a*a*b - b*b*b + pos.y;*/
 
-		if (sqrt(newa*newa + newb*newb) > 4)
+		if ((newa*newa + newb*newb) > 4)
 		{
 			return 1 - ((float)count / loopSize);
 		}

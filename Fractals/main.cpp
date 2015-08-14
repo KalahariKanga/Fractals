@@ -17,11 +17,13 @@ int main()
 
 	
 	sf::Event event;
-	bool needUpdate = 0;
-	while (1)
+	bool needUpdate = 0, quit = 0;
+	while (!quit)
 	{
 		while (window.pollEvent(event))
 		{
+			if (event.type == sf::Event::Closed)
+				quit = 1;
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Z)
@@ -67,6 +69,8 @@ int main()
 		sprite.setTexture(texture);
 		window.draw(sprite);
 		window.display();
+		sf::Time time;
+		sf::sleep(sf::milliseconds(50));
 	}
 	return 0;
 }

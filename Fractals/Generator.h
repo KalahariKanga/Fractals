@@ -16,7 +16,7 @@ protected:
 	virtual float generatePoint(sf::Vector2<coord> pos) = 0;
 public:
 	Generator();
-	~Generator();
+	virtual ~Generator();
 	DrawContext* context; //make private
 	void run();
 };

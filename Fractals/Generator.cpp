@@ -26,10 +26,8 @@ void Generator::subdivideContext()
 	{
 		View wView(context->worldView.x + c*worldWidth, worldY, worldWidth, worldHeight);
 		View sView(context->screenView.x + c*screenWidth, context->screenView.y, screenWidth, context->screenView.h);
-//		contexts.emplace_back(wView, sView);
-//		contexts.push_back(DrawContext(wView, sView));
-		contexts.push_back(std::make_shared<DrawContext>(wView, sView));
 
+		contexts.push_back(std::make_shared<DrawContext>(wView, sView));
 		incompleteContexts.push_back(std::shared_ptr<DrawContext>(contexts.back()));
 	}
 }
@@ -56,37 +54,26 @@ void Generator::worker()
 
 void Generator::run()
 {
-	/***************
-	//populate contexts and incompleteContexts
-	//start workers
-	//wait for workers
-	//merge contexts
-	****************/
-	
 	auto start_time = std::chrono::high_resolution_clock::now();
-	
-	
-	
 
 	
-	////for now im going to not try and subdivide space
-	//incompleteContexts.clear();
-	//incompleteContexts.push_back(context);
-	//worker();
+		////for now im going to not try and subdivide space
+		//incompleteContexts.clear();
+		//incompleteContexts.push_back(std::make_shared<DrawContext>(*context));
+		//worker();
 	
+		contexts.clear();
+		incompleteContexts.clear();
 
-	contexts.clear();
-	incompleteContexts.clear();
+		subdivideContext();
+		std::vector<std::thread> threads;
+		for (int c = 0; c < workers; c++)
+			threads.push_back(std::thread(&Generator::worker, this));
+		for (auto &t : threads)
+			t.join();
+		for (auto dc : contexts)
+			context->mergeContext(dc.get());
 	
-	subdivideContext();
-	std::vector<std::thread> threads;
-	for (int c = 0; c < workers; c++)
-		threads.push_back(std::thread(&Generator::worker,this));
-	for (auto &t : threads)
-		t.join();
-	for (auto dc : contexts)
-		context->mergeContext(dc.get());
-
 	auto end_time = std::chrono::high_resolution_clock::now();
 
 	std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count() << "\n";
