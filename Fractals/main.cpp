@@ -1,4 +1,5 @@
 #include "MandelbrotGenerator.h"
+#include "JuliaGenerator.h"
 
 int main()
 {
@@ -10,7 +11,7 @@ int main()
 	window.create(sf::VideoMode(640, 640), "Fractals");
 	
 
-	MandelbrotGenerator gen;
+	JuliaGenerator gen;
 	DrawContext context(View(-2, -2, 4, 4), View(0, 0, 640, 640));
 	gen.context = &context;
 	gen.run();
