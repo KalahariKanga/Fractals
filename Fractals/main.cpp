@@ -9,13 +9,13 @@ int main()
 	sf::Texture texture;
 
 	window.create(sf::VideoMode(640, 640), "Fractals");
-	
+	ColourPalette::buildPalette(500);
 
 	JuliaGenerator gen;
 	DrawContext context(View(-2, -2, 4, 4), View(0, 0, 640, 640));
 	gen.context = &context;
 	gen.run();
-
+	
 	
 	sf::Event event;
 	bool needUpdate = 0, quit = 0;
