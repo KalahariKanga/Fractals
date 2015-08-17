@@ -79,3 +79,7 @@ void Generator::run()
 	std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count() << "\n";
 }
 
+void Generator::onEvent(sf::Event ev)
+{
+
+}

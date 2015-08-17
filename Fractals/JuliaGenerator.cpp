@@ -3,7 +3,7 @@
 
 JuliaGenerator::JuliaGenerator()
 {
-	juliaX = juliaY = 0.3;
+	
 }
 
 
@@ -19,8 +19,8 @@ float JuliaGenerator::generatePoint(sf::Vector2<coord> pos)
 	int loopSize = abs(log(context->worldView.w)) * 50 + 100;
 	for (int count = 0; count < loopSize; count++)
 	{
-		newa = a*a - b*b + juliaX;
-		newb = 2 * a*b + juliaY;
+		newa = a*a - b*b + juliaPos.x;
+		newb = 2 * a*b + juliaPos.y;
 
 		if ((newa*newa + newb*newb) > 4)
 		{
@@ -34,4 +34,17 @@ float JuliaGenerator::generatePoint(sf::Vector2<coord> pos)
 		}
 	}
 	return 0;
+}
+
+void JuliaGenerator::onEvent(sf::Event ev)
+{
+	Generator::onEvent(ev);
+	if (ev.type == sf::Event::MouseMoved)
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			juliaPos = context->screenToWorld(ev.mouseMove.x, ev.mouseMove.y);
+			run();
+		}
+	}
 }

@@ -19,5 +19,6 @@ public:
 	virtual ~Generator();
 	DrawContext* context; //make private
 	void run();
+	virtual void onEvent(sf::Event ev);
 };
 
