@@ -1,6 +1,7 @@
 #include "MandelbrotGenerator.h"
 #include "JuliaGenerator.h"
 #include "BurningShipGenerator.h"
+#include "BurningShipJuliaGenerator.h"
 
 int main()
 {
@@ -12,7 +13,7 @@ int main()
 	window.create(sf::VideoMode(640, 640), "Fractals");
 	ColourPalette::buildPalette(500);
 
-	BurningShipGenerator gen;
+	BurningShipJuliaGenerator gen;
 	DrawContext context(View(-2, -2, 4, 4), View(0, 0, 640, 640));
 	gen.context = &context;
 	gen.run();

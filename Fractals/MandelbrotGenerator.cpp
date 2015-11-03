@@ -20,9 +20,7 @@ float MandelbrotGenerator::generatePoint(sf::Vector2<coord> pos)
 	{
 		newa = a*a - b*b + pos.x;
 		newb = 2 * a*b + pos.y;
-		/*newa = a*a*a - 3*a*b*b + pos.x;
-		newb = 3*a*a*b - b*b*b + pos.y;*/
-
+		
 		if ((newa*newa + newb*newb) > 4)
 		{
 			return 1 - ((float)count / loopSize);
