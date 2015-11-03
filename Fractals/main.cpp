@@ -13,10 +13,10 @@ int main()
 	window.create(sf::VideoMode(640, 640), "Fractals");
 	ColourPalette::buildPalette(500);
 
-	BurningShipJuliaGenerator gen;
+	std::unique_ptr<Generator> gen(new MandelbrotGenerator());
 	DrawContext context(View(-2, -2, 4, 4), View(0, 0, 640, 640));
-	gen.context = &context;
-	gen.run();
+	Generator::context = &context;
+	gen->run();
 	
 	
 	sf::Event event;
@@ -26,12 +26,32 @@ int main()
 		while (window.pollEvent(event))
 		{
 
-			gen.onEvent(event);
+			gen->onEvent(event);
 
 			if (event.type == sf::Event::Closed)
 				quit = 1;
 			if (event.type == sf::Event::KeyPressed)
 			{
+				if (event.key.code == sf::Keyboard::Num1)
+				{
+					gen.reset(new MandelbrotGenerator());
+					needUpdate = 1;
+				}
+				if (event.key.code == sf::Keyboard::Num2)
+				{
+					gen.reset(new JuliaGenerator());
+					needUpdate = 1;
+				}
+				if (event.key.code == sf::Keyboard::Num3)
+				{
+					gen.reset(new BurningShipGenerator());
+					needUpdate = 1;
+				}
+				if (event.key.code == sf::Keyboard::Num4)
+				{
+					gen.reset(new BurningShipJuliaGenerator());
+					needUpdate = 1;
+				}
 				if (event.key.code == sf::Keyboard::Z)
 				{
 					context.worldView.scale(2);
@@ -67,7 +87,7 @@ int main()
 
 		if (needUpdate)
 		{
-			gen.run();
+			gen->run();
 			needUpdate = 0;
 		}
 

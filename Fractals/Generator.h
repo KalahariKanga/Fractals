@@ -6,7 +6,7 @@ class Generator
 	std::vector<std::shared_ptr<DrawContext>> incompleteContexts;
 	std::vector<std::shared_ptr<DrawContext>> contexts;
 	std::mutex contextsMutex;
-	
+
 	void subdivideContext();
 	void worker();
 	unsigned workers;
@@ -17,8 +17,8 @@ protected:
 public:
 	Generator();
 	virtual ~Generator();
-	DrawContext* context; //make private
 	void run();
+	static DrawContext* context;
 	virtual void onEvent(sf::Event ev);
 };
 

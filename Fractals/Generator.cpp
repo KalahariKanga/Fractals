@@ -1,6 +1,6 @@
 #include "Generator.h"
 
-
+DrawContext* Generator::context;
 Generator::Generator()
 {
 	workers = std::thread::hardware_concurrency();
